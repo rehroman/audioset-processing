@@ -6,7 +6,7 @@
 import argparse
 import os
 import core.utils as utils
-
+import csv
 
 def find(args):
     """
@@ -14,7 +14,12 @@ def find(args):
     :param args:
     :return:
     """
-    print("Finding all files labeled with classes" + args.classes + " in " + args.audio_data_dir)
+    if args.classes is None:
+        with open(args.label_file, 'r') as file:
+            reader = csv.reader(file)
+            next(reader)
+            args.classes = [row[2].strip('"') for row in reader]
+    print("Finding all files labeled from " + str(len(args.classes)) + " classes.")
 
     for class_name in args.classes:
         utils.find(class_name, args)
@@ -27,7 +32,12 @@ def download(args):
     :param args:
     :return:
     """
-    print("Downloading classes from AudioSet.")
+    if args.classes is None:
+        with open(args.label_file, 'r') as file:
+            reader = csv.reader(file)
+            next(reader)
+            args.classes = [row[2].strip('"') for row in reader]
+    print("Downloading " + str(len(args.classes)) + " classes from AudioSet.")
 
     for class_name in args.classes:
         utils.download(class_name, args)
