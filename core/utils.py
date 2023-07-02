@@ -65,9 +65,9 @@ def download(class_name, args):
                     break
 
                 # print command for debugging
-                print("ffmpeg -n -ss " + str(row[1]) + " -t 10 -i $(yt-dlp -f 'bestaudio' -g https://www.youtube.com/watch?v=" +
+                print("ffmpeg -n -ss " + str(row[1]) + " -t 9 -i $(yt-dlp -f 'bestaudio' -g https://www.youtube.com/watch?v=" +
                         str(row[0]) + ") -ar " + str(args.sample_rate) + " -- \"" + dst_dir + "/" + str(row[0]) + "_" + row[1] + ".wav\"")
-                exit_code = os.system(("ffmpeg -n -ss " + str(row[1]) + " -t 10 -i $(yt-dlp -f 'bestaudio' -g https://www.youtube.com/watch?v=" +
+                exit_code = os.system(("ffmpeg -n -ss " + str(row[1]) + " -t 9 -i $(yt-dlp -f 'bestaudio' -g https://www.youtube.com/watch?v=" +
                         str(row[0]) + ") -ar " + str(args.sample_rate) + " -- \"" + dst_dir + "/" + str(row[0]) + "_" + row[1] + ".wav\""))
                 if exit_code == 0:
                     limit -= 1
